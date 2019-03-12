@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+  <head>
+    <title>ФИО</title>
+    <style>
+      .label {
+        padding-right: 10px;
+      }
+    </style>
+    <script>
+      function splitButton_onclick()
+      {
+        var fullname = document.getElementById("fullname").value;
+        var nameArray = fullname.split(' ');
+        
+        document.getElementById("surname").value = nameArray[0]
+        document.getElementById("name").value = nameArray[1]
+        document.getElementById("fathername").value = nameArray[2]
+      }
+    </script>
+  </head>
+  <body>
+    <span class="label">Полное имя:</span>
+    <input type="text" id="fullname" size="60">
+    <input type="button" value="Разделить" onclick="splitButton_onclick()">
+    <div>
+      <div>
+        <div><span class="label">Фамилия:</span><input type="text" id="surname" readonly></div>
+        <div><span class="label">Имя:</span><input type="text" id="name" readonly></div>
+        <div><span class="label">Отчество:</span><input type="text" id="fathername" readonly></div>
+      </div>
+    </div>
+  </body>

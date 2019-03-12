@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script>
+        // Модальные окошки
+        // 1. alert - просто выводит сообщение
+        alert("Привет!");
+
+        // 2. prompt(title, default) - выводит окошко в которое можно ввести значение,
+        // возвращает строку или null если пользователь отменил ввод
+        var result = prompt("Enter your age", "");
+        alert("Your age is " + result);
+
+        // 3. confirm(question) - задает вопрос и возвращает true или false
+        var answer = confirm("Вы еврей?");
+        if (answer)
+            alert("А поцчему ви спгашиваите?");
+        else
+            alert("Слава Богу!");
+
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>

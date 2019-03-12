@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>getElementsByName()</title>
+		<script>
+			function radios(){
+				radios = document.getElementsByName("sex");
+				
+				if(radios.length !=0){
+					for(i=0; i < radios.length; i++){
+						if(radios[i].checked){
+							alert(radios[i].value);
+						}
+					}
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div><input type="radio" name="sex" value="male" onchange="radios()">Мужской</div>
+		<div><input type="radio" name="sex" value="female">Женский</div>
+	</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+		<script>
+			// 1. функция isEmpty - проверяющая пустой объект или нет
+			function isEmpty(obj){
+				if(obj == undefined)
+					return true;
+
+				for(key in obj){
+						return false;
+				}
+
+				return true;
+			}
+
+			var obj1;
+			var obj2 = null;
+			var obj3 = {};
+			var obj4 = {"isLoaded": true};
+
+
+			var salaries = {
+					"Вася": 100,
+					"Петя": 300,
+					"Даша": 250 };
+
+
+			// 2. расчет зарплат
+			function calcSalary(){
+				;
+
+				var salary = 0;
+
+				for(key in salaries){
+					salary+= salaries[key];
+				}
+
+				return salary;
+			}
+
+			function maxSalary(){
+				var max = 0;
+				var name;
+
+				for(key in salaries){
+					if(salaries[key] >= max){
+						max = salaries[key];
+						name = key;
+					}
+				}
+
+				return {"name": name, "salary": max};
+			}
+
+			// angular code
+			app = angular.module("app", []);
+			app.controller("ctrl", function($scope)
+				{
+						$scope.obj1 = obj1;
+						$scope.obj2 = obj2;
+						$scope.obj3 = obj3;
+						$scope.obj4 = obj4;
+						$scope.isEmpty = isEmpty;
+						$scope.salary = calcSalary();
+						$scope.maxSalary = maxSalary();
+				});
+		</script>
+	</head>
+	<body ng-app="app" ng-controller="ctrl">
+		<h3> функция isEmpty() </h3>
+		<div>
+			<div> obj1 : {{isEmpty(obj1)}}</div>
+			<div> obj2 : {{isEmpty(obj2)}}</div>
+			<div> obj3 : {{isEmpty(obj3)}}</div>
+			<div> obj4 : {{isEmpty(obj4)}}</div>
+		</div>
+		<h3> Salary </h3>
+		<div>Salary is {{salary}}</div>
+		<div>{{maxSalary.name}} has max salary: {{maxSalary.salary}}</div>
+
+	</body>
+</html>

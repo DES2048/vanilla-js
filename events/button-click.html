@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Button click</title>
+        <script>
+            function onButtonClick(button) {
+                'use strict';
+            
+                alert("You clicked button with name " + button.name);
+            }
+        </script>
+    </head>
+    <body>
+        <!-- событие onClick клик на кнопке, а вообще клик по любому html или form-элементу -->
+        <!-- this ссылается на тот элемент в контексте которого исп. js-код -->
+        <input type="button" name="b" value="Click me!" onclick="onButtonClick(this)">
+    </body>
+</html>

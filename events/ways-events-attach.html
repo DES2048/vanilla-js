@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>3 способа назначения обработчиков</title>
+        <script>
+            var counter = 0;
+            
+            // в качестве обработчика события может выступать обычная функция
+            function onBClick(elem){
+                counter++;
+                
+               
+                elem.value = "You clicked " + counter + " times."; 
+            }
+            
+            function onRemoveClickListener(){
+                // можно удалить существующий обработчик
+                dom1.onclick = null;
+            }
+        </script>
+    </head>
+    <body>
+        <h3> 3 способа назначения обработчиков</h3>
+        <ul>
+            <li>
+                <h4> Через атрибут html-элемента</h4>
+                <!-- обработчик назначается через аттрибут с названием on+имя события например onclick.
+                Код который пишется в обработчике оборачивается в анонимную функцию и присваивается DOM-атрибуту on+имясобытия
+                -->                
+                <input type="button" name="b1" value="Click me!" onclick="alert('You did it!')">
+                <!-- В установке атрибута можно использовать this, который ссылается на элемент на котором сработал обработчик -->
+                <input type="button" name="counter_button" value="Click me too!" onclick="onBClick(this)">
+            </li>
+            <li>
+                <h4>Через DOM-свойство элемента</h4>
+                <input type="button" id="dom1" value="Click me!"/>
+                <script>
+                    // берем DOM-свойство по формуле on<имя_события> и присваиваем ему функцию анонимную или существующую
+                    dom1.onclick=function(){
+                        alert("You clicked again")    
+                    }
+                </script>
+                <input type="button" value="Remove listener" onclick="onRemoveClickListener()">
+                
+            </li>
+            <li>
+                <h4>Через функцию addEventListener() можно навешивать более чем один обработчик</h4>
+                <input type="button" id="fuck" value="Fucking button">
+                <script>
+                    // addEventListener - добавляет к элементу функцию обработчик события
+                    //!!! ВНИМАНИЕ, если предпологается что обработчик впоследствии может быть удален, то нужно 
+                    // использовать уже существующую функцию, а не анонимную, так как ссылка на объект функции служит
+                    // чем то вроде ключа при назначении события, а если мы попытаемся удалить функцтю, даже с тем же кодом,
+                    // но анонимную, это будет уже другой объект функции и ничего не выйдет
+                    
+                    function handler1(){
+                        alert("handler 1");   
+                    }
+                    
+                    function handler2(){
+                        alert("handler 2")
+                    }
+                    
+                    //!!! ОбРАБОТЧИКИ ВЫЗЫВАЮТСЯ В ТОМ ПОРЯДКЕ В КОТОРОМ БЫЛИ НАЗНАЧЕНЫ
+                    
+                    fuck.addEventListener("click", handler1); // Первый
+                    fuck.addEventListener("click", handler2); // второй
+                    
+                    // Третий
+                    fuck.onclick=function(){
+                        alert("dom-handler");
+                    }
+                </script>
+                <input type="button" id="remove_handlers" value="Remove handlers">
+                <script>
+                    function removeHandlers(){
+                        // Функция удаления событий
+                        //!!! УДАЛАЯЕТ ТОЛЬКО СОБЫТИЯ, НАЗНАЧЕНЫЕ ЧЕРЕЗ addEventListener(), события назначеные через html или dom-атрибут
+                        // не будут удалены
+                        // для удаления обработчика нужна ссылка на функцию обработчик
+                        fuck.removeEventListener("click", handler1);
+                        fuck.removeEventListener("click", handler2);
+                    }
+                    
+                    remove_handlers.addEventListener("click", removeHandlers);
+                </script>
+            </li>
+        </ul>
+    </body>
+</html>

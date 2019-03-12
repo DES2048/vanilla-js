@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Объекты как ассоциативные массивы</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js">
+		</script>
+		<script>
+			// рассмотрим объекты как ассоциативные масивы
+			
+			// Можно создавать так
+			var o1 = new Object();
+
+			// распространенней так
+			var o2 = {};
+
+			var person = {};
+
+			// А можно сразу проинициализировать свойства объекта
+			var matchresult ={c1: "Barcelona", c2: "Real", s1: 3, s2: 0};
+
+			// Добавление нового свойства к объекту осуществляется обращением к этому свойству
+			person.name = "John";
+			person.age = 25;
+
+			// второе обращение к свойству перезапишет его
+			person.age = 30;
+
+			// также к свойству можно обращаться через []
+			person["surname"] = "Dew";
+
+			person.passw = "1111";
+
+			// удаляется свойство через delete
+			delete person.passw;
+
+			// проверить наличие свойства у объекта можно через in
+			person.ispassw = "passw" in person;
+
+			// или сравнить это свойство с undefined
+			adminSet = person.isAdmin === undefined;
+
+			// angular
+			app = angular.module("app", []);
+			app.controller("ctrl", function($scope)
+				{
+					$scope.person = person;
+					$scope.matchresult = matchresult;
+				});
+		</script>
+		<script>
+		</script>
+	</head>
+	<body ng-app="app">
+		<div ng-controller="ctrl">
+			<div>Name: {{person.name}}</div>
+			<div>Age: {{person.age}}</div>
+			<div>Surname: {{person.surname}}</div>
+			<div ng-if="person.ispassw">Password: {{person.passw}}</div>
+			</br>
+			<div>{{matchresult.c1}} {{matchresult.s1}} : {{matchresult.s2}} {{matchresult.c2}}</div>
+			<div id="props"></div>
+			<script>
+				var props = {"age":31,
+						"weight": 113,
+						"country": "Russia"};
+
+				// демонстрация перебора элементов
+				for(key in props){
+					// создаем div для отображения кодов
+					codeDiv = document.createElement("div");
+					codeDiv.innerHTML = "" + key + ":" + props[key];
+
+					propdiv = document.getElementById("props");
+					propdiv.appendChild(codeDiv);
+
+				}
+
+				//!!! При переборе ключей объекта, важно что если ключи можно привести к числам, то ключи будут появлятся в
+				// сортированном виде, чтобы избежать этого необходимо добавить к ключу что-то что не давало бы ему привестись к числу
+			</script>
+		</div>
+	</body>
+</html>

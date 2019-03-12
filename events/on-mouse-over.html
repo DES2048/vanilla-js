@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>onMouseOver()</title>
+        <script>
+            var counter = 0;
+            function onOverCounter(el) {
+                'use strict';
+                counter++;
+                
+                el.innerHTML = "You overred " + counter + " times.";
+            }
+        </script>
+    </head>
+    <body>
+        <span onmouseover="onOverCounter(this)">Over me!</span>    
+    </body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>getElementById()</title>
+		<script>
+			function onChange(){
+				// функция принимает id элемента и возвращает Element если он найден или null, если такого элемента нет
+				check = document.getElementById("check");
+				
+				if(check != null)
+					alert(check.checked);
+			}
+		</script>
+	</head>
+	<body>
+		<div><input type="checkbox" id="check" onchange="onChange()">Check</div> 
+	</body>
+</html>
